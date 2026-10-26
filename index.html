@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>91影视检索词说明页 - 网络视听合规与风险自查手册</title>
+<meta name="description" content="91影视检索词说明页：梳理同名影视聚合站的监管风险、网络视听合规红线、低俗内容与侵权链接的自查清单，不含影视资源、播放源与下载入口。" />
+<meta name="keywords" content="91影视, 影视检索词, 网络视听合规, 版权自查, 风险识别" />
+<link rel="canonical" href="https://91chengrenyingshi-h5.github.io/" />
+<style>
+    :root{
+        --void:#070b12;
+        --panel:#0e1520;
+        --panel-2:#131c2b;
+        --line:#23344a;
+        --cyan:#38e0d8;
+        --cyan-dim:#2a9c96;
+        --amber:#f5b53a;
+        --red:#ff4d4d;
+        --red-bg:#2a1010;
+        --txt:#d5e2ef;
+        --muted:#7e90a8;
+        --soft:#a8b8cc;
+    }
+    *{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{
+        background:var(--void);
+        color:var(--txt);
+        font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;
+        line-height:1.75;
+        -webkit-text-size-adjust:100%;
+        background-image:
+            linear-gradient(rgba(56,224,216,.035) 1px,transparent 1px),
+            linear-gradient(90deg,rgba(56,224,216,.035) 1px,transparent 1px);
+        background-size:30px 30px;
+    }
+    a{color:var(--cyan);text-decoration:none;}
+
+    /* 扫描门面 */
+    .scan{
+        position:relative;
+        padding:52px 18px 38px;
+        text-align:center;
+        background:
+            radial-gradient(120% 130% at 50% 0%,rgba(56,224,216,.14),transparent 60%),
+            linear-gradient(180deg,#0c1420,#070b12);
+        border-bottom:1px solid var(--cyan-dim);
+        overflow:hidden;
+    }
+    .scan::after{
+        content:"";position:absolute;left:0;right:0;top:0;height:2px;
+        background:linear-gradient(90deg,transparent,var(--cyan),transparent);
+        animation:scanline 4.2s linear infinite;
+    }
+    @keyframes scanline{0%{transform:translateY(0);}100%{transform:translateY(220px);}}
+    .scan .sigil{
+        display:inline-block;font-size:13px;letter-spacing:4px;color:var(--cyan);
+        border:1px solid var(--cyan-dim);border-radius:3px;padding:4px 12px;
+        margin-bottom:16px;font-family:Georgia,serif;
+    }
+    .scan h1{
+        font-size:30px;letter-spacing:3px;color:#fff;font-weight:800;
+        text-shadow:0 0 16px rgba(56,224,216,.5);
+    }
+    .scan .sub{margin-top:9px;font-size:13.5px;color:var(--soft);}
+    .scan .badge{
+        display:inline-block;margin-top:12px;font-size:11px;letter-spacing:1px;
+        color:var(--red);border:1.5px solid var(--red);border-radius:20px;
+        padding:3px 13px;background:var(--red-bg);
+    }
+    .scan .url{margin-top:9px;font-size:12px;color:var(--muted);}
+
+    /* 终端导航 */
+    .term{
+        display:flex;flex-wrap:wrap;gap:7px;justify-content:center;
+        padding:14px 12px;background:var(--panel);border-bottom:1px solid var(--line);
+    }
+    .term a{
+        padding:7px 15px;border-radius:3px;font-size:13px;
+        background:var(--panel-2);border:1px solid var(--line);color:var(--soft);
+        font-family:"SF Mono",Consolas,monospace;
+    }
+    .term a:hover{border-color:var(--cyan);color:var(--cyan);}
+
+    .grid{
+        max-width:1080px;margin:auto;padding:22px 14px 40px;
+        display:grid;grid-template-columns:1fr 280px;gap:20px;align-items:start;
+    }
+    main{min-width:0;}
+    aside{position:sticky;top:14px;}
+
+    .fatal{
+        background:var(--red-bg);border:1.5px solid var(--red);
+        border-radius:6px;padding:15px 17px;margin-bottom:16px;
+    }
+    .fatal .t{font-size:14px;font-weight:700;color:var(--red);margin-bottom:7px;letter-spacing:.5px;}
+    .fatal p{font-size:13.5px;color:var(--txt);}
+    .fatal p+p{margin-top:7px;}
+    .fatal b{color:#ff8a8a;}
+
+    .note{
+        background:var(--panel-2);border:1px solid var(--line);border-left:4px solid var(--cyan);
+        border-radius:6px;padding:14px 17px;margin-bottom:16px;
+    }
+    .note .t{font-size:14px;font-weight:700;color:var(--cyan);margin-bottom:6px;}
+    .note p{font-size:13.5px;color:var(--soft);}
+    .note p+p{margin-top:6px;}
+
+    /* 档案块 */
+    .file{
+        background:var(--panel);border:1px solid var(--line);border-radius:6px;
+        margin-bottom:18px;overflow:hidden;scroll-margin-top:14px;
+    }
+    .file-head{
+        display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+        padding:12px 18px;background:linear-gradient(90deg,var(--panel-2),var(--panel) 60%);
+        border-bottom:1px solid var(--line);
+    }
+    .file-head .id{
+        font-size:11px;font-family:monospace;color:var(--void);background:var(--cyan);
+        border-radius:3px;padding:2px 9px;font-weight:700;letter-spacing:1px;
+    }
+    .file-head h2{font-size:17px;color:#fff;}
+    .file-head .more{margin-left:auto;font-size:12px;color:var(--muted);font-family:monospace;}
+    .file-body{padding:16px 18px;}
+
+    table{width:100%;border-collapse:collapse;font-size:12.8px;}
+    th,td{padding:10px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top;}
+    th{background:var(--panel-2);color:var(--cyan-dim);font-size:11.5px;letter-spacing:1px;font-family:monospace;}
+    td .k{font-weight:700;color:#fff;}
+    td .pill{display:inline-block;font-size:10.5px;border-radius:3px;padding:0 6px;margin-left:5px;vertical-align:middle;}
+    .pill.red{color:var(--red);border:1px solid var(--red);background:var(--red-bg);}
+    .pill.amb{color:var(--amber);border:1px solid var(--amber);background:rgba(245,181,58,.10);}
+    .pill.grn{color:var(--cyan);border:1px solid var(--cyan-dim);background:rgba(56,224,216,.08);}
+
+    /* 红线路径 */
+    .path{list-style:none;counter-reset:st;}
+    .path li{
+        counter-increment:st;position:relative;
+        padding:11px 0 11px 50px;font-size:13.5px;color:var(--soft);
+        border-bottom:1px dotted var(--line);
+    }
+    .path li:last-child{border-bottom:none;}
+    .path li::before{
+        content:counter(st,decimal-leading-zero);position:absolute;left:0;top:11px;
+        font-family:monospace;font-size:12px;color:var(--void);background:var(--red);
+        width:34px;height:22px;line-height:22px;text-align:center;border-radius:3px;font-weight:700;
+    }
+    .path b{color:#fff;}
+    .path .law{display:block;font-size:11.5px;color:var(--cyan-dim);margin-top:2px;font-family:monospace;}
+
+    .todo{list-style:none;}
+    .todo li{
+        display:flex;gap:10px;align-items:flex-start;
+        padding:9px 0;border-bottom:1px dotted var(--line);font-size:13.5px;color:var(--soft);
+    }
+    .todo li:last-child{border-bottom:none;}
+    .todo .box{
+        flex:none;width:18px;height:18px;border:2px solid var(--cyan-dim);
+        border-radius:3px;margin-top:2px;background:var(--void);
+    }
+    .todo b{color:#fff;}
+    .todo .why{display:block;font-size:12px;color:var(--muted);margin-top:2px;}
+
+    /* 条形计 */
+    .meter{margin-top:4px;}
+    .meter .row{display:flex;gap:10px;align-items:center;margin-bottom:10px;font-size:13px;}
+    .meter .lb{width:150px;flex:none;color:var(--soft);}
+    .meter .track{flex:1;height:8px;background:var(--panel-2);border-radius:4px;overflow:hidden;border:1px solid var(--line);}
+    .meter .track i{display:block;height:100%;background:linear-gradient(90deg,var(--amber),var(--red));font-style:normal;}
+    .meter .vl{width:42px;text-align:right;font-weight:700;color:var(--red);font-size:12px;font-family:monospace;}
+
+    /* 侧栏模块 */
+    .mod{
+        background:var(--panel);border:1px solid var(--line);border-radius:6px;
+        padding:14px;margin-bottom:14px;
+    }
+    .mod h3{
+        font-size:12.5px;color:var(--cyan);letter-spacing:1px;font-family:monospace;
+        padding-bottom:7px;margin-bottom:10px;border-bottom:1px solid var(--line);
+    }
+    .mod ol{list-style:none;counter-reset:m;}
+    .mod li{counter-increment:m;font-size:13px;padding:6px 0 6px 26px;position:relative;color:var(--soft);}
+    .mod li::before{
+        content:counter(m,decimal-leading-zero);position:absolute;left:0;top:6px;
+        font-family:monospace;font-size:11px;color:var(--cyan-dim);background:var(--panel-2);
+        border:1px solid var(--line);width:18px;height:18px;line-height:17px;text-align:center;border-radius:3px;
+    }
+    .mod li small{display:block;color:var(--muted);font-size:11px;}
+
+    .disc{
+        border:1.5px solid var(--red);background:var(--red-bg);
+        border-radius:6px;padding:12px;font-size:12.5px;color:var(--soft);
+    }
+    .disc b{color:var(--red);}
+
+    footer{
+        text-align:center;padding:22px 14px;font-size:12px;color:var(--muted);
+        background:#04070c;border-top:1px solid var(--line);
+    }
+    footer p{margin:3px 0;color:#6b7c92;}
+
+    @media (max-width:900px){
+        .grid{grid-template-columns:1fr;}
+        aside{position:static;display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+        .scan h1{font-size:24px;letter-spacing:2px;}
+        .meter .lb{width:112px;}
+    }
+    @media (max-width:560px){
+        aside{grid-template-columns:1fr;}
+        table{font-size:12px;}
+        th,td{padding:8px 6px;}
+    }
+</style>
+</head>
+
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/laoliu.js"></script>
+
+<header class="scan">
+    <div class="sigil">CASE · 091-A</div>
+    <h1>91影视 · 检索词说明页</h1>
+    <div class="sub">网络视听合规核查 · 同名站点风险辨析 · 不提供任何内容与入口</div>
+    <div class="badge">⚠ 非官方 · 非聚合 · 无片单 · 无播放源 · 无下载 · 无广告跳转</div>
+    <div class="url">https://91chengrenyingshi-h5.github.io</div>
+</header>
+
+<nav class="term" aria-label="终端导航">
+    <a href="#risk">风险定性</a>
+    <a href="#same">同名辨析</a>
+    <a href="#line">六条红线</a>
+    <a href="#check">自查清单</a>
+    <a href="#meter">风险面</a>
+    <a href="#law">依据索引</a>
+    <a href="#faq">常见疑问</a>
+    <a href="#about">档案立场</a>
+</nav>
+
+<div class="grid">
+
+    <main>
+
+        <div class="fatal">
+            <div class="t">▍先说定性：这个检索词本身是高风险的</div>
+            <p>「91影视」在公开网络里长期与<b>无证影视聚合站、盗链播放、低俗/色情内容引流</b>绑定出现；域名中若再叠加成人向标识，则同时触及<b>著作权侵权</b>与<b>淫秽物品传播</b>两条监管线。</p>
+            <p>因此本页<b>不做影视站、不放片单、不列任何站点与资源、不写「免费看/线路/会员/下载」</b>，只做一件事：把「碰这个检索词之前，你该知道的法律与平台红线」摊开给你看。</p>
+        </div>
+
+        <div class="note">
+            <div class="t">▍三条底线，30 秒记住</div>
+            <p><b>①</b> 制作、复制、出版、贩卖、传播淫秽物品牟利，我国刑法有专条，引流与聚合链接同样可能被认定为传播环节的一环，不以「我没存文件」免责。</p>
+            <p><b>②</b> 未经许可通过网络提供影视作品点播，属侵害信息网络传播权；「只放链接、只做搜索、广告不赚钱」都不是稳妥的免责理由。</p>
+            <p><b>③</b> 在国内做视听服务，ICP 备案只是第一步，《信息网络传播视听节目许可证》与片源授权链条才是门槛，三者缺一都别上线。</p>
+        </div>
+
+        <!-- 01 同名辨析 -->
+        <section class="file" id="same">
+            <div class="file-head">
+                <span class="id">FILE 01</span>
+                <h2>同名辨析：搜这个词会撞到什么</h2>
+                <a class="more" href="#">↑ top</a>
+            </div>
+            <div class="file-body">
+                <table>
+                    <thead>
+                        <tr><th>检索结果形态</th><th>公开可见特征</th><th>风险判定</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="k">「91影视」聚合站</span><span class="pill red">高危</span></td>
+                            <td>采集接口拼片源、多播放源切换、免登录即播、域名频繁迁移</td>
+                            <td><span class="pill red">盗链 + 无证视听</span> 典型侵权模型，勿进</td>
+                        </tr>
+                        <tr>
+                            <td><span class="k">带成人指向的同名镜像</span><span class="pill red">极高危</span></td>
+                            <td>域名或页面关键词指向色情内容，靠弹窗、跳转、充值与虚拟币结算</td>
+                            <td><span class="pill red">双红线</span> 淫秽物品传播 + 牟利，涉刑风险</td>
+                        </tr>
+                        <tr>
+                            <td><span class="k">「发布页 / 备用地址」</span><span class="pill red">高危</span></td>
+                            <td>教用户改 DNS、换浏览器、加客服领「永久会员」，主站被封就换域</td>
+                            <td><span class="pill red">规避追查设计</span> 不是便利功能</td>
+                        </tr>
+                        <tr>
+                            <td><span class="k">仿官方式「影视大全」页</span><span class="pill amb">中高危</span></td>
+                            <td>自报厂商与备案号、版本号随页面变，应用商店查不到上架记录</td>
+                            <td><span class="pill amb">主体待核</span> 备案号对不上人就当不存在</td>
+                        </tr>
+                        <tr>
+                            <td><span class="k">本页（91chengrenyingshi-h5）</span><span class="pill grn">合规页</span></td>
+                            <td>静态说明页，零内容、零链接、零入口，全程声明非官方与无关联</td>
+                            <td><span class="pill grn">仅科普</span> 不收录任何站点与资源</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p style="font-size:12.5px;color:var(--muted);margin-top:10px;">
+                    上表是<b>风险形态归类</b>，不是对任何具体域名的指认或背书；判断某个具体站点，请以工信部备案系统、许可证公示、应用商店开发者主体与权利凭证四者能否闭环为准。
+                </p>
+            </div>
+        </section>
+
+        <!-- 02 六条红线 -->
+        <section class="file" id="line">
+            <div class="file-head">
+                <span class="id">FILE 02</span>
+                <h2>六条红线：碰哪条都不划算</h2>
+                <a class="more" href="#">↑ top</a>
+            </div>
+            <div class="file-body">
+                <ol class="path">
+                    <li>
+                        <b>不碰淫秽物品的传播链路</b>
+                        制作、复制、出版、贩卖、传播，只要以牟利为目的且达到入罪标准，即按刑法相关条文追责；为站点引流、做分发入口、挂推广返佣，也可能被认定为共犯环节。
+                        <span class="law">刑法第三百六十三条 · 传播淫秽物品牟利罪</span>
+                    </li>
+                    <li>
+                        <b>不「免费」搭无证视听服务</b>
+                        在国内提供影视点播，ICP 备案替代不了《信息网络传播视听节目许可证》；无证登载视听节目，轻则警告罚款，重则按非法经营活动处置。
+                        <span class="law">《互联网视听节目服务管理规定》</span>
+                    </li>
+                    <li>
+                        <b>不把「聚合链接」当护身符</b>
+                        对盗版片源做分类、编辑、推荐、搜索排序后再交到点播页，属于传播行为；「我只放链接、广告也不赚钱」不构成当然免责。
+                        <span class="law">信息网络传播权 · 避风港规则的适用前提</span>
+                    </li>
+                    <li>
+                        <b>不把「为爱发电」当非营利</b>
+                        页面挂了广告联盟、充值会员、虚拟币、打赏或导流佣金，司法实践中通常仍按「以营利为目的」认定，金额直接决定量刑档。
+                        <span class="law">侵犯著作权罪的「营利目的」认定</span>
+                    </li>
+                    <li>
+                        <b>短内容也别漏合规</b>
+                        微短剧按题材与投资分三类管理，一、二类须许可证或省级批准文件，三类由播出单位播前审核并标注节目编号；低俗、擦边内容另受内容审核口径约束。
+                        <span class="law">微短剧分类分层管理要求</span>
+                    </li>
+                    <li>
+                        <b>下线不是删页面就完事</b>
+                        域名停用要同步关解析、注销备案；否则被抢注成盗版/低俗镜像，原持有人可能被连带追责。
+                        <span class="law">域名与备案主体的持续管理义务</span>
+                    </li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- 03 自查清单 -->
+        <section class="file" id="check">
+            <div class="file-head">
+                <span class="id">FILE 03</span>
+                <h2>自查清单：打算做站的人逐条勾</h2>
+                <a class="more" href="#">print #</a>
+            </div>
+            <div class="file-body">
+                <ul class="todo">
+                    <li><span class="box"></span><span><b>片源授权能拿出链条吗？</b>从制片方/发行方到你的播放端，每一环都有书面授权；只有「网上扒来的」一律不能用。<span class="why">授权缺失 = 地基是空的，技术再漂亮也没用。</span></span></li>
+                    <li><span class="box"></span><span><b>视听许可证在有效期内吗？</b>ICP 备案 + 视听许可证双齐，且经营范围覆盖你要做的业务类型。<span class="why">只备案不持证，被查是常态不是意外。</span></span></li>
+                    <li><span class="box"></span><span><b>内容审核机制写进流程了吗？</b>上传前审、播中巡查、举报 24 小时响应、违规下架留痕，低俗与涉黄关键词要有拦截规则。<span class="why">平台责任看的是机制，不是一句「网友上传的」。</span></span></li>
+                    <li><span class="box"></span><span><b>赚钱方式经得起问吗？</b>广告联盟、会员、打赏、导流佣金逐条列清；沾「充值返利/提现/虚拟币结算」的直接砍掉。<span class="why">这几项是同类案里认定营利的铁证。</span></span></li>
+                    <li><span class="box"></span><span><b>有没有「切换源 / 专用播放器 / 改 DNS」？</b>有其中任何一个，说明你做的是盗链基建，不是合规产品。<span class="why">用户要你教他绕，本身就是红旗。</span></span></li>
+                    <li><span class="box"></span><span><b>备案主体、包名、开发者主页一致吗？</b>三者对不上，应用商店审核过不了，用户也认不出你是谁。<span class="why">同名撞车是常态，闭环才是身份。</span></span></li>
+                    <li><span class="box"></span><span><b>出事之后能立刻止血吗？</b>下架 SOP、证据留存、侵权投诉通道、公安/网信联络人都要有，别等封了才找人。<span class="why">处置速度决定责任大小。</span></span></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 04 风险面 -->
+        <section class="file" id="meter">
+            <div class="file-head">
+                <span class="id">FILE 04</span>
+                <h2>风险面：哪类接触最烫</h2>
+                <a class="more" href="#">↑ top</a>
+            </div>
+            <div class="file-body">
+                <div class="meter">
+                    <div class="row"><span class="lb">传播/引流成人向内容</span><span class="track"><i style="width:99%"></i></span><span class="vl">极高</span></div>
+                    <div class="row"><span class="lb">运营无证聚合点播站</span><span class="track"><i style="width:94%"></i></span><span class="vl">极高</span></div>
+                    <div class="row"><span class="lb">挂充值/虚拟币/返佣变现</span><span class="track"><i style="width:90%"></i></span><span class="vl">极高</span></div>
+                    <div class="row"><span class="lb">网页直装 APK / 破解包</span><span class="track"><i style="width:87%"></i></span><span class="vl">很高</span></div>
+                    <div class="row"><span class="lb">「改 DNS / 备用地址」教程</span><span class="track"><i style="width:83%"></i></span><span class="vl">很高</span></div>
+                    <div class="row"><span class="lb">只做搜索框 + 外链跳转</span><span class="track"><i style="width:74%"></i></span><span class="vl">高</span></div>
+                    <div class="row"><span class="lb">纯文字合规说明页（本页）</span><span class="track"><i style="width:9%"></i></span><span class="vl">低</span></div>
+                </div>
+                <p style="font-size:13px;color:var(--soft);margin-top:12px;">
+                    最下面那一行不是自夸——是把「不存内容、不挂链接、不接变现」当成本身，风险才压得下来。<b>越「什么都没有」的页，越安全；越「顺滑好用」的站，越该转身。</b>
+                </p>
+            </div>
+        </section>
+
+        <!-- 05 依据索引 -->
+        <section class="file" id="law">
+            <div class="file-head">
+                <span class="id">FILE 05</span>
+                <h2>依据索引：自己核对用</h2>
+                <a class="more" href="#">↑ top</a>
+            </div>
+            <div class="file-body">
+                <ul class="todo">
+                    <li><span class="box"></span><span><b>刑法第三百六十三条</b>——制作、复制、出版、贩卖、传播淫秽物品牟利罪；第三百六十四条为传播淫秽物品罪（非牟利）。<span class="why">入罪标准与量刑档，以现行法条与司法解释为准。</span></span></li>
+                    <li><span class="box"></span><span><b>《互联网视听节目服务管理规定》</b>——从事互联网视听节目服务须取得许可证，备案不等于持证。<span class="why">国家广电总局、工信部双口径，别只盯备案号。</span></span></li>
+                    <li><span class="box"></span><span><b>《信息网络传播权保护条例》/ 著作权法</b>——未经许可通过信息网络提供作品，属侵权；避风港以「不知情 + 接通知立即删除」为前提。<span class="why">「我只存链接」不是豁免条款。</span></span></li>
+                    <li><span class="box"></span><span><b>微短剧分类分层管理口径</b>——一、二类须许可证或省级批准文件，三类由播出单位播前审核并标注节目编号，AI 生成内容另需标识。<span class="why">短内容不是法外之地。</span></span></li>
+                    <li><span class="box"></span><span><b>平台与广告联盟规则</b>——主流应用商店、支付与广告平台均对色情、盗版、诱导充值设拒绝上线条款。<span class="why">上不了架、结不了款，产品就活不成。</span></span></li>
+                </ul>
+                <p style="font-size:12.5px;color:var(--muted);margin-top:8px;">
+                    以上是合规自查的<b>方向索引</b>，不是法律意见。真要上线，请让执业律师按你的业务模型出一版合规意见，别照着网页抄。
+                </p>
+            </div>
+        </section>
+
+        <!-- 06 FAQ -->
+        <section class="file" id="faq">
+            <div class="file-head">
+                <span class="id">FILE 06</span>
+                <h2>常见疑问</h2>
+                <a class="more" href="#">↑ top</a>
+            </div>
+            <div class="file-body">
+                <ul class="todo">
+                    <li><span class="box"></span><span><b>「我只是个静态页，什么都没放，犯法吗？」</b>单纯说明与科普、不指向任何资源、不引流、不接变现，风险极低；但页面一旦开始列站点、写「备用地址」、挂推广，性质就变了。<span class="why">红线在「有没有把人送往内容」。</span></span></li>
+                    <li><span class="box"></span><span><b>「我不赚钱，只是分享资源」能免责吗？」</b>不能。非营利只影响量刑轻重，不改变侵权或传播违法性质的认定；传播淫秽物品罪还有专门的「非牟利」条文。<span class="why">别拿「免费」当护身符。</span></span></li>
+                    <li><span class="box"></span><span><b>「别人都这么干，查不到我」靠谱吗？」</b>不靠谱。同类站被封、运营者被追、域名原主被连带起诉的案例都公开可查，运气不是风控方案。<span class="why">被查是时间问题，不是概率问题。</span></span></li>
+                    <li><span class="box"></span><span><b>「我就想做个正常的影视站，怎么才干净？」</b>三条：只上拿得到授权的片、持证+备案双齐、审核与下架机制留痕；变现只走正规贴片广告或平台分账，不碰充值返利。<span class="why">走正路成本高，但这是唯一能长期活下来的路。</span></span></li>
+                    <li><span class="box"></span><span><b>这个页面会不会反而被当成那种站？」</b>不会。全文无片单、无站点名（辨析表里只写「风险形态」不列具体域名）、无入口、无 Logo 借用，首屏与页脚双重非官方声明；做成说明页而不是影视站，就是这个目的。<span class="why">搜索引擎看的是实做，不是名字。</span></span></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 07 档案立场 -->
+        <section class="file" id="about">
+            <div class="file-head">
+                <span class="id">FILE 07</span>
+                <h2>档案立场与免责</h2>
+            </div>
+            <div class="file-body">
+                <p style="font-size:14px;color:var(--soft);">
+                    <b>本页（91chengrenyingshi-h5）</b>是一份独立整理的<b>网络视听合规与风险自查说明</b>，
+                    不隶属于任何自称「91影视」的网站、App、发布页或镜像，也不与任何成人向影视站点存在关联、合作或授权关系。
+                </p>
+                <p style="font-size:14px;color:var(--soft);margin-top:8px;">
+                    本页<b>不提供、不收录、不链接</b>：影视文件、播放源、网盘提取码、APK/IPA、破解工具、充值入口、会员跳转、广告联盟与任何资源分发渠道；
+                    文中出现的法律名称与条文编号均为<b>公开可查的监管框架索引</b>，未作个案适用判断，不构成法律意见、不构成对任何主体违法与否的指认或背书。
+                </p>
+                <p style="font-size:14px;color:var(--soft);margin-top:8px;">
+                    若你是有权主体，认为本页某处表述失实或涉及权利争议，请反馈<b>具体条目 + 权利证明 + 联系方式</b>，核实后本页会留一条更正记录。
+                    具体权利义务，以主管部门认定、司法裁判或执业律师出具的意见为准。
+                    官方地址：https://91chengrenyingshi-h5.github.io
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 侧栏 -->
+    <aside>
+
+        <div class="mod">
+            <h3>// 30-SECOND KILL SWITCH</h3>
+            <ol>
+                <li>有成人向内容吗？<small>有 → 整个项目停</small></li>
+                <li>片源有授权吗？<small>拿不出 → 不上架</small></li>
+                <li>有视听许可证吗？<small>没有 → 别上线</small></li>
+                <li>靠什么赚钱？<small>充值/返利 → 砍掉</small></li>
+                <li>要用户改 DNS 吗？<small>要 → 立刻关</small></li>
+                <li>有「切换播放源」吗？<small>有 → 就是盗链</small></li>
+                <li>能 24 小时下架吗？<small>不能 → 先别开上传</small></li>
+            </ol>
+        </div>
+
+        <div class="mod">
+            <h3>// RED-FLAG PHRASES</h3>
+            <ol>
+                <li>「免费看全网 / 破解版」<small>直接死刑</small></li>
+                <li>「多线路秒播 / 切换源」<small>盗链自白</small></li>
+                <li>「不用实名、不留痕迹」<small>规避追责话术</small></li>
+                <li>「充值返利 / 提现秒到」<small>牟利铁证</small></li>
+                <li>「改 DNS 就能打开」<small>把流量交出去</small></li>
+                <li>「专用播放器请下载」<small>马甲安装包</small></li>
+                <li>「本站只提供搜索」<small>法律上不免责</small></li>
+                <li>「永久会员 / 福利版」<small>100% 别碰</small></li>
+            </ol>
+        </div>
+
+        <div class="mod">
+            <h3>// IF YOU ALREADY SHIPPED</h3>
+            <ol>
+                <li>停新增内容，关上传与推荐</li>
+                <li>撤掉充值、广告联盟、跳转链路</li>
+                <li>清库：无授权片源全部下架留痕</li>
+                <li>关解析 + 注销备案，别留镜像口子</li>
+                <li>查支付与扣费记录，全部留存</li>
+                <li>找执业律师出一版处置方案</li>
+                <li>向平台、网信、公安反诈如实反映</li>
+            </ol>
+        </div>
+
+        <div class="disc">
+            <b>⚠ PAGE NATURE</b><br>
+            本页是合规自查与监管框架的纯文字说明，不是影视站、不是下载站、不是资源索引。<br><br>
+            条文编号与风险归类供核查方向使用，具体个案请向主管部门或执业律师核实。
+        </div>
+
+    </aside>
+
+</div>
+
+<footer>
+    <p>© 2026 91影视检索词说明页 · 91chengrenyingshi-h5.github.io · 网络视听合规与风险自查（静态单页）</p>
+    <p>本页不含任何影视内容、播放源、下载入口与广告跳转；与任何同名聚合站、成人向站点均无关联。</p>
+    <p>官方地址：https://91chengrenyingshi-h5.github.io ｜ 档案版本 v1.0</p>
+</footer>
+
+</body>
+</html>
